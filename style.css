@@ -1,6 +1,114 @@
 body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
     font: 100%/1.5 system-ui;
+    max-width: 100ch;
+    margin-inline: auto;
+    padding-inline: 1rem; 
+    padding-block: 1rem;
+    accent-color: rgb(245, 208, 244);
   }
+
+  input, textarea, button {
+    font: inherit;
+  }
+
+  ul, li {
+    display: contents;
+  }
+
+  nav {
+    display: flex;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid oklch(80% 3% 200);
+    width: 100%;
+  }
+  
+  nav ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+    justify-content: center;
+  }
+
+  nav li {
+     margin-right: 1rem;
+     color: inherit;
+  }
+
+  nav a {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  nav a.current {
+    border-bottom: 0.4em solid oklch(80% 3% 200); /* Adds a thick bottom border */
+    padding-bottom: 0.2rem; /* Reduces bottom padding to counteract the border height */
+}
+
+nav a:hover {
+  border-bottom: 0.4em solid rgb(245, 208, 244); /* Accent color for hovered links */
+  padding-bottom: 0.2rem; /* Reduces bottom padding to counteract the border height */
+}
+
+form label,
+form input, 
+form textarea, 
+form button{
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form button {
+  margin-top: 1rem;
+  /* add a margin between the submit box and the last text box */
+ }  
+
+form label {
+  margin-bottom: 0.2em;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* gap: 0.5em; */
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+  /* grid-template-rows: auto; */
+}
+
+article {
+  display: grid;
+  grid-template-rows: subgrid;
+  /* margin: 0; */
+  gap: 1em;
+  grid-row: span 3;
+  align-items: start;
+}
+
+ article h2 {
+  margin: 0;
+ }
+
+ article img {
+  width: 100%;
+  height: auto;
+ }
+
+ h1 {
+  font-size: 4rem; 
+  margin-bottom: 0.5em; 
+}
+
+h2 {
+  font-size: 2rem; 
+  line-height: 1.1;
+}
