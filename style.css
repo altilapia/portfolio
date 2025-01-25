@@ -112,3 +112,49 @@ h2 {
   font-size: 2rem; 
   line-height: 1.1;
 }
+
+html {
+  color-scheme: light dark;
+}
+
+nav {
+  --border-color: oklch(50% 10% 200 / 40%);  /* Darker and slightly more vibrant color with transparency */
+  border-bottom-color: var(--border-color);
+  
+}
+
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-weight: inherit;
+  margin-right: 10px;
+  font-size: 80%;
+  padding: 0.5rem;
+}
+
+#color-scheme-select {
+  font-size: 16px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+/* Light mode styles */
+html[color-scheme="light"] {
+  --background: white;
+  --text-color: black;
+}
+
+/* Dark mode styles */
+html[color-scheme="dark"] {
+  --background: #121212;
+  --text-color: white;
+}
+
+/* Apply light or dark styles to the body */
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  padding: 3rem;
+}

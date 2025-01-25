@@ -16,7 +16,7 @@ section header h1 {
 
 section header h2 {
     text-align: center;
-    background: #bbcff8;
+    background: #486297;
     margin-bottom: 1;
 }
 
@@ -46,3 +46,43 @@ li {
     margin: 5px 0; /
 }
 
+html {
+    color-scheme: light dark;
+  }
+  
+nav {
+    --border-color: oklch(50% 10% 200 / 40%);  /* Darker and slightly more vibrant color with transparency */
+    border-bottom-color: var(--border-color);
+    
+}
+  
+  
+.color-scheme {
+    position: absolute;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 16px;
+}
+  
+#color-scheme-select {
+    font-size: 16px;
+    padding: 5px;
+    margin-left: 5px;
+}
+  
+
+html[data-scheme="light"] {
+    --background: white;
+    --text-color: black;
+}
+  
+html[data-scheme="dark"] {
+    --background: #121212;
+    --text-color: white;
+}
+  
+body {
+    background-color: var(--background);
+    color: var(--text-color);
+    padding: 3rem;
+}
