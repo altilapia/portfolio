@@ -4,19 +4,9 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-// const navLinks = $$("nav a");
 
-// navLinks.forEach(link => {
-//   link.classList.remove("current");
-// });
-
-// const currentLink = navLinks.find(
-//     (a) => a.host === location.host && a.pathname === location.pathname
-//   );
-  
-// if (currentLink) {
-//     currentLink.classList.add("current");
-//   }
+let nav = document.createElement('nav');
+document.body.prepend(nav);
 
 let pages = [
     { url: 'index.html', title: 'Home' },
@@ -26,8 +16,6 @@ let pages = [
 
   ];
 
-let nav = document.createElement('nav');
-document.body.prepend(nav);
 
 
 const ARE_WE_HOME = document.documentElement.classList.contains('home');
@@ -36,7 +24,8 @@ for (let p of pages) {
     let url = p.url;
     let title = p.title;
     if (!ARE_WE_HOME && !url.startsWith('http')) {
-        url = '../' + url;
+        // url = '../' + url;
+        url = '/portfolio/' + url;
     }
     let a = document.createElement('a');
     a.href = url;
