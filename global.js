@@ -20,9 +20,9 @@ function $$(selector, context = document) {
 
 let pages = [
     { url: '', title: 'Home' },
-    { url: 'projects/', title: 'Projects' },
-    { url: 'contact/', title: 'Contact' },
-    { url: 'resume/resume.html', title: 'Resume' },
+    { url: '/projects/index.html', title: 'Projects' },
+    { url: '/contact/index.html', title: 'Contact' },
+    { url: '/resume/resume.html', title: 'Resume' },
 
   ];
 
@@ -86,6 +86,7 @@ select.addEventListener('input', function (event) {
 
   localStorage.colorScheme = selectedTheme;
 });
+
 
 
   
