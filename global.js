@@ -82,7 +82,7 @@ select.addEventListener('input', function (event) {
 const baseElement = document.createElement('base');
 if (
   window.location.hostname === "127.0.0.1" ||
-  window.location.hostname === "localhost"
+//   window.location.hostname === "localhost"
 ) {
   baseElement.href = "/";
 } else {
