@@ -56,7 +56,7 @@ for (let p of pages) {
 document.body.insertAdjacentHTML(
     'afterbegin',
     `
-    <label postion: absolute; class="color-scheme">
+    <label position: absolute; class="color-scheme">
       Theme:
       <select id="color-scheme-select">
         <option value="automatic">Automatic</option>
@@ -87,15 +87,16 @@ select.addEventListener('input', function (event) {
   localStorage.colorScheme = selectedTheme;
 });
 
-console.log("hostname: ", window.location.hostname);
+const baseElement = document.createElement('base');
 if (
-    window.location.hostname === "127.0.0.1" ||
-    window.location.hostname === "localhost"
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname === "localhost"
 ) {
-    document.write('<base href="/">'); // Development
+  baseElement.href = "/";
 } else {
-    document.write('<base href="/portfolio/">'); // Production
+  baseElement.href = "/portfolio/";
 }
+document.head.appendChild(baseElement);
 
 
 
