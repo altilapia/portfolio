@@ -19,10 +19,10 @@ function $$(selector, context = document) {
 //   }
 
 let pages = [
-    { url: '', title: 'Home' },
-    { url: '/portfolio/projects/index.html', title: 'Projects' },
-    { url: '/portfolio/contact/index.html', title: 'Contact' },
-    { url: '/portfolio/resume/resume.html', title: 'Resume' },
+    { url: 'index.html', title: 'Home' },
+    { url: 'projects/index.html', title: 'Projects' },
+    { url: 'contact/index.html', title: 'Contact' },
+    { url: 'resume/resume.html', title: 'Resume' },
 
   ];
 
@@ -87,9 +87,15 @@ select.addEventListener('input', function (event) {
   localStorage.colorScheme = selectedTheme;
 });
 
-
-
-  
+console.log("hostname: ", window.location.hostname);
+if (
+    window.location.hostname === "127.0.0.1" ||
+    window.location.hostname === "localhost"
+) {
+    document.write('<base href="/">'); // Development
+} else {
+    document.write('<base href="/portfolio/">'); // Production
+}
 
 
 
