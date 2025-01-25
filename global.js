@@ -20,9 +20,9 @@ function $$(selector, context = document) {
 
 let pages = [
     { url: '', title: 'Home' },
-    { url: '/projects/index.html', title: 'Projects' },
-    { url: '/contact/index.html', title: 'Contact' },
-    { url: '/resume/resume.html', title: 'Resume' },
+    { url: '/portfolio/projects/index.html', title: 'Projects' },
+    { url: '/portfolio/contact/index.html', title: 'Contact' },
+    { url: '/portfolio/resume/resume.html', title: 'Resume' },
 
   ];
 
