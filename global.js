@@ -27,6 +27,9 @@ for (let p of pages) {
         // url = '../' + url;
         url = '/portfolio/' + url;
     }
+    if (!url.startsWith('http') && !url.startsWith('/portfolio/')) {
+        url = '/portfolio/' + url; // Prepend /portfolio/
+    }
     let a = document.createElement('a');
     a.href = url;
     a.textContent = title;
