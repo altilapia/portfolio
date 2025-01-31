@@ -100,10 +100,9 @@ document.head.appendChild(baseElement);
 
 export async function fetchJSON(url) {
   try {
-    // Adjust the URL if we're not on a local server
-    const adjustedUrl = (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') 
-      ? `/portfolio/${url}` // Add '/portfolio/' if not local
-      : url; // Use the original URL for local development
+    const adjustedUrl = window.location.hostname === 'altilapia.github.io' 
+    ? `/portfolio/${url}` // Add '/portfolio/' for GitHub Pages
+    : url; // Use the original URL for local development
 
     const response = await fetch(adjustedUrl);
 
