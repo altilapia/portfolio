@@ -38,7 +38,6 @@ for (let p of pages) {
   a.href = url;
   a.textContent = title;
 
-  // console.log(nav.innerHTML); 
 
   let linkPath = new URL(a.getAttribute('href'), window.location.origin).pathname
   .replace(/\/+$/, "") // Remove trailing slashes
@@ -102,8 +101,11 @@ document.head.appendChild(baseElement);
 // Function to fetch JSON data
 export async function fetchJSON(url) {
   try {
-    const response = await fetch(url);
-    console.log(response);
+    // const response = await fetch(url);
+    // console.log(response);
+    const adjustedUrl = window.location.pathname.includes('/portfolio/')
+      ? `/portfolio/${url}` // Add '/portfolio/' to the path if the site is hosted in the 'portfolio' folder
+      : url;
 
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
