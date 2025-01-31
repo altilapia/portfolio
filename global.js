@@ -26,7 +26,11 @@ for (let p of pages) {
   if (!ARE_WE_HOME && !url.startsWith('http')) {
     if (window.location.hostname !== "127.0.0.1" && window.location.hostname !== "localhost") {
       url = '/portfolio/' + url;
+      console.log(url);
     }
+    // } else {
+    //   url = '/portfolio/index.html' + url;
+    // }
   }
 
   // Create the anchor element
