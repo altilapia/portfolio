@@ -105,6 +105,7 @@ export async function fetchJSON(url) {
     const adjustedUrl = window.location.pathname.includes('/portfolio/')
       ? `/portfolio/${url}` 
       : url; 
+      /* added const response to check the new url*/
     const response = await fetch(adjustedUrl);
 
     if (!response.ok) {
