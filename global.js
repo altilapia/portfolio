@@ -101,12 +101,12 @@ document.head.appendChild(baseElement);
 // Function to fetch JSON data
 export async function fetchJSON(url) {
   try {
-    // Adjust the path for GitHub Pages
+    
     const adjustedUrl = window.location.pathname.includes('/portfolio/')
       ? `/portfolio/${url}` 
       : url; 
-
     const response = await fetch(adjustedUrl);
+
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
