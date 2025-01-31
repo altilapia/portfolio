@@ -4,70 +4,80 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-
+// Create the navigation element
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 
+// Define the pages
 let pages = [
-    { url: 'index.html', title: 'Home' },
-    { url: 'projects/index.html', title: 'Projects' },
-    { url: 'contact/index.html', title: 'Contact' },
-    { url: 'resume/resume.html', title: 'Resume' },
-
-  ];
-
-
+  { url: 'index.html', title: 'Home' },
+  { url: 'projects/index.html', title: 'Projects' },
+  { url: 'contact/index.html', title: 'Contact' },
+  { url: 'resume/resume.html', title: 'Resume' },
+];
 
 const ARE_WE_HOME = document.documentElement.classList.contains('home');
 
 for (let p of pages) {
-    let url = p.url;
-    let title = p.title;
-    if (!ARE_WE_HOME && !url.startsWith('http')) {
-        // url = '../' + url;
-        url = '/portfolio/' + url;
-    }
-    if (!url.startsWith('http') && !url.startsWith('/portfolio/')) {
-        url = '/portfolio/' + url; // Prepend /portfolio/
-    }
-    let a = document.createElement('a');
-    a.href = url;
-    a.textContent = title;
-    // nav.insertAdjacentHTML('beforeend', `<a href="${url}">${title}</a>`);
+  let url = p.url;
+  let title = p.title;
 
-    a.classList.toggle(
-        'current',
-        a.host === location.host && a.pathname === location.pathname
-    );
+  // Only prepend '/portfolio/' when hosted on a live server, not locally
+  if (!ARE_WE_HOME && !url.startsWith('http')) {
+    if (window.location.hostname !== "127.0.0.1" && window.location.hostname !== "localhost") {
+      url = '/portfolio/' + url;
+    }
+  }
 
-    nav.append(a)
+  // Create the anchor element
+  let a = document.createElement('a');
+  a.href = url;
+  a.textContent = title;
+
+  // console.log(nav.innerHTML); 
+
+  let linkPath = new URL(a.getAttribute('href'), window.location.origin).pathname
+  .replace(/\/+$/, "") // Remove trailing slashes
+  .replace(/\/index.html$/, ""); // Treat /index.html as /
+
+  let currentPath = window.location.pathname
+  .replace(/\/+$/, "")
+  .replace(/\/index.html$/, "");
+
+  // console.log(`Checking: ${title}, Link Path: ${linkPath}, Current Path: ${currentPath}`);
+
+  if (linkPath === currentPath) {
+  console.log(`Applying 'current' to: ${title}`);
+  a.classList.add('current');
+  }
+
+
+  // Append to the navigation bar
+  nav.append(a);
 }
 
-
-// JavaScript to add the color scheme switcher
 document.body.insertAdjacentHTML(
-    'afterbegin',
-    `
-    <label position: absolute; class="color-scheme">
-      Theme:
-      <select id="color-scheme-select">
-        <option value="automatic">Automatic</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </label>`
-  );
-  
+  'afterbegin',
+  `
+  <label class="color-scheme">
+    Theme:
+    <select id="color-scheme-select">
+      <option value="automatic">Automatic</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </label>`
+);
 
 const select = document.querySelector('.color-scheme select');
 
-
-if ('colorScheme' in localStorage){
-    const savedTheme = localStorage.colorScheme;
-    document.documentElement.style.setProperty('color-scheme', savedTheme)
+if ('colorScheme' in localStorage) {
+  const savedTheme = localStorage.colorScheme;
+  document.documentElement.style.setProperty('color-scheme', savedTheme);
+  select.value = savedTheme;
 } else {
-    document.documentElement.style.setProperty('color-scheme', 'light dark')
-    select.value = 'light dark'
+  document.documentElement.style.setProperty('color-scheme', 'light dark');
+  select.value = 'light dark';
 }
 
 select.addEventListener('input', function (event) {
@@ -75,60 +85,56 @@ select.addEventListener('input', function (event) {
   console.log('Color scheme changed to', selectedTheme);
   
   document.documentElement.style.setProperty('color-scheme', selectedTheme);
-
   localStorage.colorScheme = selectedTheme;
 });
 
+// Set base URL dynamically
 const baseElement = document.createElement('base');
-if (
-  window.location.hostname === "127.0.0.1" 
-  // ||
-  // window.location.hostname === "localhost"
-) {
-  baseElement.href = "/";
-} else {
-  baseElement.href = "/portfolio/";
-}
+baseElement.href = (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost") 
+  ? "/" 
+  : "/portfolio/";
 document.head.appendChild(baseElement);
 
-
+// Function to fetch JSON data
 export async function fetchJSON(url) {
   try {
-      // Fetch the JSON file from the given URL
-      const response = await fetch(url);
+    const response = await fetch(url);
+    console.log(response);
 
-      console.log(response);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch projects: ${response.statusText}`);
+    }
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch projects: ${response.statusText}`);
-      }
-      const data = await response.json();
-
-      return data;
+    const data = await response.json();
+    return data; 
 
   } catch (error) {
-      console.error('Error fetching or parsing JSON data:', error);
+    console.error('Error fetching or parsing JSON data:', error);
   }
 }
 
-
+// Function to render projects
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
-  // Clear the container before adding new project articles
+  const titleElement = document.querySelector('.projects-title');
+  if (titleElement) {
+    titleElement.textContent = `${projects.length} Projects`;
+  }
+
   containerElement.innerHTML = '';
 
-  // Loop through each project and create its article element
   projects.forEach(project => {
-    // Check if the containerElement is valid
     if (!containerElement || !(containerElement instanceof HTMLElement)) {
       console.error('Invalid container element.');
       return;
     }
 
-    // Create the article element for each project
-    const article = document.createElement('article');
-    article.classList.add('project');
+    const heading = document.createElement(headingLevel);
+    heading.textContent = project.title;
 
-    // Populate the article with project details using innerHTML
+
+    const article = document.createElement('article');
+    article.classList.add('project'); /* not entirely sure */
+
     article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
       <img src="${project.image}" alt="${project.title}">
@@ -136,9 +142,16 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       ${project.link ? `<a href="${project.link}">See more details</a>` : ''}
     `;
 
-    // Append the article to the container
+//     article.innerHTML = `
+//     <h3>${project.title}</h3>
+//     <img src="${project.image}" alt="${project.title}">
+//     <p>${project.description}</p>
+// `;
+
     containerElement.appendChild(article);
   });
 }
 
-
+export async function fetchGitHubData(username) {
+  return  fetchJSON(`https://api.github.com/users/${username}`);
+}

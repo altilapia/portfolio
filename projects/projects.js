@@ -1,27 +1,25 @@
 import { fetchJSON, renderProjects } from '../global.js';
 
-// const projectsContainer = document.querySelector('.projects');
-// renderProjects(projects, projectsContainer, 'h2');
 
-async function loadAndRenderProjects() {
+async function loadProjects() {
     try {
-        // Fetch the project data from the projects.json file
         const projects = await fetchJSON('../lib/projects.json');
 
-        // Select the container where the project articles will be rendered
-        const projectsContainer = document.querySelector('.projects');
-
-        // Check if the container exists before rendering
-        if (projectsContainer) {
-            // Render the fetched projects with an <h2> heading level
-            renderProjects(projects, projectsContainer, 'h2');
-        } else {
-            console.error('Projects container not found.');
+        if (!projects) {
+            console.error('No projects found.');
+            return;
         }
+
+        const projectsContainer = document.querySelector('.projects');
+        if (!projectsContainer) {
+            console.error('Projects container not found.');
+            return;
+        }
+
+        renderProjects(projects, projectsContainer, 'h2');
     } catch (error) {
-        console.error('Error loading or rendering projects:', error);
+        console.error('Error loading projects:', error);
     }
 }
 
-// Call the function to load and render the projects
-loadAndRenderProjects();
+loadProjects(); // Immediately invoke the function

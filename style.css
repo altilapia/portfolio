@@ -45,9 +45,9 @@ body {
   }
 
   nav a.current {
-    border-bottom: 0.4em solid oklch(80% 3% 200); /* Adds a thick bottom border */
+    border-bottom: 0.4em solid oklch(80% 3% 200); /*Adds a thick bottom border */
     padding-bottom: 0.2rem; /* Reduces bottom padding to counteract the border height */
-}
+  }
 
 nav a:hover {
   border-bottom: 0.4em solid rgb(245, 208, 244); /* Accent color for hovered links */
@@ -158,3 +158,20 @@ body {
   color: var(--text-color);
   padding: 3rem;
 }
+
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  
+  gap: 10px;  
+}
+
+#profile-stats dt {
+  grid-row: 1; 
+  font-weight: bold;  
+}
+
+#profile-stats dd {
+  grid-row: 2;  
+  margin: 0;  
+}
+
