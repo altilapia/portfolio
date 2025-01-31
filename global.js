@@ -107,6 +107,9 @@ export async function fetchJSON(url) {
       ? `/portfolio${url}` // Add '/portfolio/' for GitHub Pages only for relative URLs
       : url; // Otherwise, use the URL as it is (absolute URLs won't be modified)
 
+    // Ensure there's no period issue by logging the adjusted URL for clarity
+    console.log("Adjusted URL:", adjustedUrl);
+
     const response = await fetch(adjustedUrl);
 
     if (!response.ok) {
