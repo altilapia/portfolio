@@ -104,7 +104,7 @@ export async function fetchJSON(url) {
     // const response = await fetch(url);
     // console.log(response);
     const adjustedUrl = window.location.pathname.includes('/portfolio/')
-      ? `/portfolio/${url}` // Add '/portfolio/' to the path if the site is hosted in the 'portfolio' folder
+      ? `/portfolio/${url}` 
       : url;
 
     if (!response.ok) {
