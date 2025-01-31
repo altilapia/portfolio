@@ -98,16 +98,14 @@ baseElement.href = (window.location.hostname === "127.0.0.1" || window.location.
   : "/portfolio/";
 document.head.appendChild(baseElement);
 
-// Function to fetch JSON data
 export async function fetchJSON(url) {
   try {
-    
-    const adjustedUrl = window.location.pathname.includes('/portfolio/')
-      ? `/portfolio/${url}` 
-      : url; 
-      /* added const response to check the new url*/
+    // Adjust the URL if we're not on a local server
+    const adjustedUrl = (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') 
+      ? `/portfolio/${url}` // Add '/portfolio/' if not local
+      : url; // Use the original URL for local development
+
     const response = await fetch(adjustedUrl);
-    console.log(response);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
@@ -115,7 +113,6 @@ export async function fetchJSON(url) {
 
     const data = await response.json();
     return data; 
-
   } catch (error) {
     console.error('Error fetching or parsing JSON data:', error);
   }
