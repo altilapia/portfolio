@@ -3,6 +3,7 @@ import { fetchJSON, renderProjects } from '../global.js';
 
 async function loadProjects() {
     try {
+        let jsonPath = '../lib/projects.json';
         const projects = await fetchJSON('../lib/projects.json');
 
         if (!projects) {
