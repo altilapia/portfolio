@@ -101,13 +101,12 @@ document.head.appendChild(baseElement);
 export async function fetchJSON(url) {
   try {
     const isRelative = url.startsWith('/') || url.startsWith('./');
-
-    // Adjust URL path only if it's a relative URL and we're on GitHub Pages
+    console.log("Original URL:", url);
+    
     const adjustedUrl = window.location.hostname === 'altilapia.github.io' && isRelative
-      ? `/portfolio${url.replace(/^\/+/, '')}`  // Remove leading slashes to avoid double slashes
-      : url; // Otherwise, use the URL as it is (absolute URLs won't be modified)
-
-    // Log the adjusted URL to confirm it doesn't have extra periods or slashes
+    ? `/portfolio${url.replace(/^\/+|^\.+/, '')}`  // Remove leading slashes or dots to avoid double periods
+    : url;
+  
     console.log("Adjusted URL:", adjustedUrl);
 
     const response = await fetch(adjustedUrl);
