@@ -81,8 +81,9 @@ select.addEventListener('input', function (event) {
 
 const baseElement = document.createElement('base');
 if (
-  window.location.hostname === "127.0.0.1" ||
-//   window.location.hostname === "localhost"
+  window.location.hostname === "127.0.0.1" 
+  // ||
+  // window.location.hostname === "localhost"
 ) {
   baseElement.href = "/";
 } else {
@@ -91,9 +92,53 @@ if (
 document.head.appendChild(baseElement);
 
 
+export async function fetchJSON(url) {
+  try {
+      // Fetch the JSON file from the given URL
+      const response = await fetch(url);
+
+      console.log(response);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch projects: ${response.statusText}`);
+      }
+      const data = await response.json();
+
+      return data;
+
+  } catch (error) {
+      console.error('Error fetching or parsing JSON data:', error);
+  }
+}
 
 
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  // Clear the container before adding new project articles
+  containerElement.innerHTML = '';
 
+  // Loop through each project and create its article element
+  projects.forEach(project => {
+    // Check if the containerElement is valid
+    if (!containerElement || !(containerElement instanceof HTMLElement)) {
+      console.error('Invalid container element.');
+      return;
+    }
 
+    // Create the article element for each project
+    const article = document.createElement('article');
+    article.classList.add('project');
+
+    // Populate the article with project details using innerHTML
+    article.innerHTML = `
+      <${headingLevel}>${project.title}</${headingLevel}>
+      <img src="${project.image}" alt="${project.title}">
+      <p>${project.description}</p>
+      ${project.link ? `<a href="${project.link}">See more details</a>` : ''}
+    `;
+
+    // Append the article to the container
+    containerElement.appendChild(article);
+  });
+}
 
 
