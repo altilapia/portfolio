@@ -102,9 +102,9 @@ export async function fetchJSON(url) {
   try {
     const isRelative = url.startsWith('/') || url.startsWith('./');
     console.log("Original URL:", url);
-    
+
     const adjustedUrl = window.location.hostname === 'altilapia.github.io' && isRelative
-    ? `/portfolio${url.replace(/^\/+|^\.+/, '')}`  // Remove leading slashes or dots to avoid double periods
+    ? `/portfolio/${url.replace(/^\/+|^\.+/, '')}`  // Remove leading slashes or dots to avoid double periods
     : url;
   
     console.log("Adjusted URL:", adjustedUrl);
