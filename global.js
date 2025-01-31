@@ -100,9 +100,12 @@ document.head.appendChild(baseElement);
 
 export async function fetchJSON(url) {
   try {
-    const adjustedUrl = window.location.hostname === 'altilapia.github.io' 
-    ? `/portfolio/${url}` // Add '/portfolio/' for GitHub Pages
-    : url; // Use the original URL for local development
+    const isRelative = url.startsWith('/') || url.startsWith('./');
+
+    // Adjust URL path only if it's a relative URL and we're on GitHub Pages
+    const adjustedUrl = window.location.hostname === 'altilapia.github.io' && isRelative
+      ? `/portfolio${url}` // Add '/portfolio/' for GitHub Pages only for relative URLs
+      : url; // Otherwise, use the URL as it is (absolute URLs won't be modified)
 
     const response = await fetch(adjustedUrl);
 
