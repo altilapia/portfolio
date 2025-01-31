@@ -107,6 +107,7 @@ export async function fetchJSON(url) {
       : url; 
       /* added const response to check the new url*/
     const response = await fetch(adjustedUrl);
+    console.log(response);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
