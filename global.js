@@ -104,10 +104,10 @@ export async function fetchJSON(url) {
 
     // Adjust URL path only if it's a relative URL and we're on GitHub Pages
     const adjustedUrl = window.location.hostname === 'altilapia.github.io' && isRelative
-      ? `/portfolio${url}` // Add '/portfolio/' for GitHub Pages only for relative URLs
+      ? `/portfolio${url.replace(/^\/+/, '')}`  // Remove leading slashes to avoid double slashes
       : url; // Otherwise, use the URL as it is (absolute URLs won't be modified)
 
-    // Ensure there's no period issue by logging the adjusted URL for clarity
+    // Log the adjusted URL to confirm it doesn't have extra periods or slashes
     console.log("Adjusted URL:", adjustedUrl);
 
     const response = await fetch(adjustedUrl);
@@ -122,7 +122,6 @@ export async function fetchJSON(url) {
     console.error('Error fetching or parsing JSON data:', error);
   }
 }
-
 // Function to render projects
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
   const titleElement = document.querySelector('.projects-title');
