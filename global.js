@@ -12,10 +12,8 @@ document.body.prepend(nav);
 let pages = [
   { url: 'index.html', title: 'Home' },
   { url: 'projects/index.html', title: 'Projects' },
-  // { url: 'projects/projects.js', title: 'Projects JS' },
   { url: 'contact/index.html', title: 'Contact' },
   { url: 'resume/resume.html', title: 'Resume' },
-  // { url: 'lib/projects.json', title: 'Projects JSON' }
 ];
 
 const ARE_WE_HOME = document.documentElement.classList.contains('home');
@@ -104,8 +102,7 @@ export async function fetchJSON(url) {
   try {
     console.log("Original URL:", url);
 
-    // Check if the URL is relative and if the site is hosted on GitHub Pages
-    const isRelative = url.startsWith('/') || url.startsWith('../'); // add . //
+    const isRelative = url.startsWith('/') || url.startsWith('../'); 
     console.log("Is relative:", isRelative);
     const adjustedUrl = window.location.hostname === 'altilapia.github.io' && isRelative
       ? `/portfolio${url.startsWith('/') ? '' : '/'}${url.replace(/^\/+|^\.+/, '')}`  // Remove leading slashes or dots to avoid double periods
