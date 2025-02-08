@@ -153,12 +153,6 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       ${project.link ? `<a href="${project.link}">See more details</a>` : ''}
     `;
 
-//     article.innerHTML = `
-//     <h3>${project.title}</h3>
-//     <img src="${project.image}" alt="${project.title}">
-//     <p>${project.description}</p>
-// `;
-
     containerElement.appendChild(article);
   });
 }
