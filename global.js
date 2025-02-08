@@ -103,7 +103,8 @@ export async function fetchJSON(url) {
     console.log("Original URL:", url);
 
     // Check if the URL is relative and if the site is hosted on GitHub Pages
-    const isRelative = url.startsWith('/') || url.startsWith('./');
+    const isRelative = url.startsWith('/') || url.startsWith('../'); // add . //
+    console.log("Is relative:", isRelative);
     const adjustedUrl = window.location.hostname === 'altilapia.github.io' && isRelative
       ? `/portfolio${url.startsWith('/') ? '' : '/'}${url.replace(/^\/+|^\.+/, '')}`  // Remove leading slashes or dots to avoid double periods
       : url;
