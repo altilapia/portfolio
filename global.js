@@ -100,31 +100,41 @@ document.head.appendChild(baseElement);
 
 export async function fetchJSON(url) {
   try {
-    const isRelative = url.startsWith('/') || url.startsWith('./');
     console.log("Original URL:", url);
 
-    // const adjustedUrl = window.location.hostname === 'altilapia.github.io' && isRelative
-    // ? `/portfolio/${url.replace(/^\/+|^\.+/, '')}`  // Remove leading slashes or dots to avoid double periods
-    // : url;
+    // Check if the URL is relative and if the site is hosted on GitHub Pages
+    const isRelative = url.startsWith('/') || url.startsWith('./');
     const adjustedUrl = window.location.hostname === 'altilapia.github.io' && isRelative
       ? `/portfolio${url.startsWith('/') ? '' : '/'}${url.replace(/^\/+|^\.+/, '')}`  // Remove leading slashes or dots to avoid double periods
       : url;
-  
+
     console.log("Adjusted URL:", adjustedUrl);
 
     const response = await fetch(adjustedUrl);
-
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
-
     const data = await response.json();
     return data; 
   } catch (error) {
     console.error('Error fetching or parsing JSON data:', error);
   }
 }
-// Function to render projects
+
+// export async function fetchJSON(url) {
+//   try {
+//       console.log(url);
+//       const response = await fetch(url);
+//       if (!response.ok) {
+//         throw new Error(`Failed to fetch projects: ${response.statusText}`);
+//       }
+//       const data = await response.json();
+//       return data; 
+//   } catch (error) {
+//       console.error('Error fetching or parsing JSON data:', error);
+//   }
+// }
+
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
   const titleElement = document.querySelector('.projects-title');
   if (titleElement) {
