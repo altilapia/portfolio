@@ -87,7 +87,7 @@ let query = '';
 
 async function loadProjects() {
     try {
-        const projects = await fetchJSON('/portfolio/lib/projects.json'); // Corrected path
+        const projects = await fetchJSON('../lib/projects.json'); // Corrected path
         if (!projects || projects.length === 0) {
             console.error('No projects found.');
             return;
