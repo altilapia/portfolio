@@ -12,8 +12,10 @@ document.body.prepend(nav);
 let pages = [
   { url: 'index.html', title: 'Home' },
   { url: 'projects/index.html', title: 'Projects' },
+  // { url: 'projects/projects.js', title: 'Projects JS' },
   { url: 'contact/index.html', title: 'Contact' },
   { url: 'resume/resume.html', title: 'Resume' },
+  // { url: 'lib/projects.json', title: 'Projects JSON' }
 ];
 
 const ARE_WE_HOME = document.documentElement.classList.contains('home');
