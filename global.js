@@ -14,6 +14,7 @@ let pages = [
   { url: 'projects/index.html', title: 'Projects' },
   { url: 'contact/index.html', title: 'Contact' },
   { url: 'resume/resume.html', title: 'Resume' },
+  { url: 'meta/index.html', title: 'Meta' }
 ];
 
 const ARE_WE_HOME = document.documentElement.classList.contains('home');
