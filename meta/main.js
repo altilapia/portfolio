@@ -6,7 +6,7 @@ async function loadData() {
     // const isGitHubPages = window.location.hostname === 'altilapia.github.io';
     // const csvPath = isGitHubPages ? '/portfolio/meta/loc.csv' : './loc.csv';
     
-    data = await d3.csv('./meta/loc.csv', (row) => ({
+    data = await d3.csv('./loc.csv', (row) => ({
       ...row,
       line: Number(row.line), 
       depth: Number(row.depth),
