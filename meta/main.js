@@ -17,7 +17,6 @@ async function loadData() {
     console.log('Data loaded:', data);
     displayStats(); 
   } catch (error) {
-    console.log(csvPath);
     console.error('Error loading CSV file:', error);
   }
 }
