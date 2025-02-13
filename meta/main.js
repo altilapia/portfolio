@@ -58,8 +58,8 @@ function displayStats() {
   // create the dl element
   const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
-  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
-  dl.append('dd').text(data.length);
+  // dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+  // dl.append('dd').text(data.length);
 
   dl.append('dt').text('Total commits');
   dl.append('dd').text(commits.length);
