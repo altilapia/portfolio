@@ -144,6 +144,7 @@ html[color-scheme="light"] {
   --background: white;
   --text-color: black;
   --stats-background: #f0f0f0;
+  --stats-border: #000000;
 }
 
 
@@ -151,6 +152,7 @@ html[color-scheme="dark"] {
   --background: #121212;
   --text-color: white;
   --stats-background: #000000;
+  --stats-border: #ffffff;
 }
 
 body {
@@ -242,7 +244,7 @@ path {
 }
 
 .stats-container {
-  border: 1px solid #ffffff; /*Add a border to the stats container */
+  /* border: 1px solid #000000; Add a border to the stats container */
   border-radius: 8px; /* Add rounded corners */
   padding: 1em; /* Add padding inside the container */
   margin: 20px 0; /* Add margin around the container */
@@ -324,4 +326,22 @@ circle {
 
 circle:hover {
   transform: scale(1.5);
+}
+
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8;
+  }
+}
+
+.selection {
+  fill-opacity: 0.1;
+  stroke: black;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 5 3;
+  animation: marching-ants 2s linear infinite;
+}
+
+circle.selected {
+  fill: #ff6b6b;
 }
