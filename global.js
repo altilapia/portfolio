@@ -122,20 +122,6 @@ export async function fetchJSON(url) {
   }
 }
 
-// export async function fetchJSON(url) {
-//   try {
-//       console.log(url);
-//       const response = await fetch(url);
-//       if (!response.ok) {
-//         throw new Error(`Failed to fetch projects: ${response.statusText}`);
-//       }
-//       const data = await response.json();
-//       return data; 
-//   } catch (error) {
-//       console.error('Error fetching or parsing JSON data:', error);
-//   }
-// }
-
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
   const titleElement = document.querySelector('.projects-title');
   if (titleElement) {
@@ -153,18 +139,19 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     const heading = document.createElement(headingLevel);
     heading.textContent = project.title;
 
-
     const article = document.createElement('article');
-    article.classList.add('project'); /* not entirely sure */
+    article.classList.add('project');
+
+    const isValidUrl = project.url && project.url.trim() !== '';
 
     article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
-      <img src="${project.image}" alt="${project.title}">
-      <div>
+      <img src="${project.image}" alt="${project.title}" class="project-image">
+      <div class="project-details">
         <p>${project.description}</p>
         <div>${project.year}</div>
+        ${isValidUrl ? `<a href="${project.url}" target="_blank" class="project-link">See more details</a>` : ''}
       </div>
-      ${project.link ? `<a href="${project.link}">See more details</a>` : ''}
     `;
 
     containerElement.appendChild(article);

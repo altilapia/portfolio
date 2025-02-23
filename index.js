@@ -1,15 +1,23 @@
 import { fetchJSON, renderProjects, fetchGitHubData } from './global.js';
 
-async function loadProjects() {
+document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const projects = await fetchJSON('./lib/projects.json');
-    const latestProjects = projects.slice(0, 3);
+    const response = await fetch('lib/projects.json');
+    const projects = await response.json();
+
+    // Sort projects by year in descending order
+    const sortedProjects = projects.sort((a, b) => b.year - a.year);
+
+    // Get the top 3 most recent projects
+    const recentProjects = sortedProjects.slice(0, 3);
+
+    // Render the recent projects
     const projectsContainer = document.querySelector('.projects');
-    renderProjects(latestProjects, projectsContainer, 'h2');
+    renderProjects(recentProjects, projectsContainer, 'h3');
   } catch (error) {
     console.error('Error loading projects:', error);
   }
-}
+});
 
 async function loadGitHubData() {
     try {
@@ -31,6 +39,5 @@ async function loadGitHubData() {
     }
   }
   
-loadProjects();
 loadGitHubData();
 

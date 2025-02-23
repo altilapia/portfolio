@@ -25,6 +25,16 @@
     placeholder="🔍 Search projects…"
     />
 
-    <div class="projects"></div>
+    <div class="projects">
+      <div class="project">
+        <h2>{{title}}</h2>
+        <p>{{year}}</p>
+        <img src="{{image}}" alt="{{title}} screenshot">
+        <p>{{description}}</p>
+        {{#if url}}
+          <p><a href="{{url}}" target="_blank">View Project</a></p>
+        {{/if}}
+      </div>
+    </div>
 </body>
 </html>

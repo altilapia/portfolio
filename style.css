@@ -345,3 +345,39 @@ circle:hover {
 circle.selected {
   fill: #ff6b6b;
 }
+
+.project {
+  margin-bottom: 20px; /* Add some margin to separate each project */
+  /* border: 1px solid #ddd; Optional: Add a border to each project */
+  padding: 10px; /* Optional: Add padding to each project */
+  /* border-radius: 5px; Optional: Add rounded corners */
+  overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.project img {
+  max-width: 100%; /* Ensure images are responsive */
+  height: auto;
+  display: block;
+  margin: 0 auto 10px; /* Center the image and add margin to the bottom */
+}
+
+.project p {
+  margin-bottom: 10px; /* Add margin to the bottom of the description */
+}
+
+.project .project-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Add gap between elements */
+}
+
+.project .project-link {
+  align-self: flex-start; /* Align the link to the start */
+  margin-top: 10px; /* Add margin to the top of the link */
+  color: blue; /* Optional: Change the link color */
+  text-decoration: none; /* Optional: Remove underline */
+}
+
+.project .project-link:hover {
+  text-decoration: underline; /* Optional: Add underline on hover */
+}
